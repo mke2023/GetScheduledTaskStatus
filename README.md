@@ -1,6 +1,6 @@
 # GetScheduledTaskStatus
 
-This script uses the cmdlets Get-ScheduledTask and Get-ScheduledTaskInfo to retrieve status informations of a scheduled task. It is written for use with the Advanced EXE/Script Sensor of PRTG Network Monitor. To get information of a remote host, WinRM needs to be configured. Use 'winrm qc' for quick configuration on the remote host.
+This script uses the cmdlets Get-ScheduledTask and Get-ScheduledTaskInfo to retrieve status informations of a scheduled task on Windows computers. It is written for use with the Advanced EXE/Script Sensor of PRTG Network Monitor. To get information of a remote host, WinRM needs to be configured. Use 'winrm qc' for quick configuration on the remote host.
 
 Unfortunately the build in sensor 'ScheduledTask2XML' didn't work reliable for me. Finally I think there's a problem with the activation of the RemoteRegistry that is required for retrieving the information of the scheduled task on remote computers. Another possibility is to use the COM object 'Schedule.Service'. Using PSRemoting and the Invoke-Command works well except for the computer that is running the PRTG Probe. There you need elevated rights to run the script. I've found no way to handle this with the need of returning the results as a console output.
 
