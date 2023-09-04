@@ -58,7 +58,7 @@ Try {
         $objTaskInfo = Get-ScheduledTaskInfo -TaskName $TaskName -TaskPath $TaskPath -CimSession $SessionID -ErrorAction Stop
     }
 
-    # convert the return values to the format needed by PRTG (only digits allowed)
+    # convert the return values to the format needed by PRTG (only numbers are allowed)
     # change the date format to the desired language format without delimiter
     $TaskEnabled = [int]$objTask.Settings.Enabled
     $TaskLastTaskResult = [int]$objTaskInfo.LastTaskResult
