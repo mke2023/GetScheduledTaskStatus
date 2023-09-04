@@ -1,10 +1,10 @@
 # GetScheduledTaskStatus
 
-This script uses the cmdlets Get-ScheduledTask and Get-ScheduledTaskInfo to retrieve status informations of a scheduled task on Windows computers. It is written for use with the Advanced EXE/Script Sensor of PRTG Network Monitor. To get information of a remote host, WinRM needs to be configured. Use 'winrm qc' for quick configuration on the remote host.
+This script retrieves information of the state of a scheduled task on Windows computers. It uses the powershell cmdlets 'Get-ScheduledTask' and 'Get-ScheduledTaskInfo'. It is written for use with the Advanced EXE/Script Sensor of PRTG Network Monitor. To get this information of a remote host, WinRM needs to be configured. Use 'winrm qc' for a quick configuration on the remote host.
 
 In my environement this script runs reliable. Network with Windows Server Standard 2019, Windows 10 Enterprise, PRTG Network Monitor 23.3.86.1520. Feel free to discuss possible bugs in the discussion area.
 
-Unfortunately the build in sensor 'ScheduledTask2XML' didn't work reliable for me. Finally I think there's a problem with the activation of the RemoteRegistry that is required for retrieving the information of the scheduled task on remote computers. Another possibility is to use the COM object 'Schedule.Service'. Using PSRemoting and the Invoke-Command works well except for the computer that is running the PRTG Probe. There you need elevated rights to run the script. I've found no way to handle this with the need of returning the results as a console output.
+Unfortunately the build in sensor 'ScheduledTask2XML' didn't work reliable for me. Finally I think there's a problem with the remote activation of the registry that is required for retrieving the information of the scheduled task on remote computers. Another possibility is to use the COM object 'Schedule.Service' together with 'Invoke-Command' and PSRemoting. This works well for remote computers except for the computer that is running the PRTG Probe. There you need elevated rights to run the script. I've found no way to handle this with the need of returning the results as a console output.
 
 I want to share this and say thanks to all the people that posted their ideas that gave me the possibility to develop this script.
 
