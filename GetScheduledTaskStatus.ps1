@@ -47,6 +47,7 @@ Try {
     }
     
     # if running on local host don't use a CimSession (otherwise elevated rights are needed)
+    # possible names for target host are: hostname, FQDN, TCP/IP address
     $objDNS = [System.Net.Dns]::GetHostByName($env:COMPUTERNAME)
     If (($TargetHost -eq $env:COMPUTERNAME) -or ($TargetHost -eq $objDNS.HostName) -or ($TargetHost -match $objDNS.AddressList)) {    
         $objTask = Get-ScheduledTask -TaskName $TaskName -TaskPath $TaskPath -ErrorAction Stop
@@ -58,10 +59,10 @@ Try {
     }
 
     # convert the return values to the format needed by PRTG (only digits allowed)
+    # change the date format to the desired language format without delimiter
     $TaskEnabled = [int]$objTask.Settings.Enabled
     $TaskLastTaskResult = [int]$objTaskInfo.LastTaskResult
     $TaskLastRunTime = ($objTaskInfo.LastRunTime).ToString('ddMMyyyy')
-    
     $Success = $true
 } Catch {
     # error messages in non english format needs to be converted in ASCII, otherwise PRTG can't read the Json text
@@ -114,7 +115,7 @@ If ($Success -eq $true) {
         'showChart'       = '0'
         'showTable'       = '0'
     }
-
+    
     $Result = [pscustomobject]@{
         result = $Channels
         text = "$Message"
